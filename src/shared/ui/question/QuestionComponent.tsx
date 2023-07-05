@@ -4,16 +4,47 @@ interface QuestionProps {
     text: string;
     answers: string[];
     onAnswerSelect: (answerIndex: number, questionIndex: number) => void;
-    questionIndex: number
-    correctUserResponse: boolean
+    questionIndex: number;
+    correctUserResponse: boolean;
 }
 
-const QuestionComponent = ({ text, answers, onAnswerSelect,questionIndex, correctUserResponse }: QuestionProps) => {
+const QuestionComponent = ({
+                               text,
+                               answers,
+                               onAnswerSelect,
+                               questionIndex,
+                               correctUserResponse,
+                           }: QuestionProps) => {
+    const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(null);
+    const [isAnyCheckboxSelected, setIsAnyCheckboxSelected] = useState(false);
 
-    const handleAnswerSelect = (answerIndex: number, questionIndex:number) => {
-        console.log('handleAnswerSelect');
-        onAnswerSelect(answerIndex,questionIndex);
+    const handleAnswerSelect = (answerIndex: number) => {
+        if (selectedAnswerIndex === answerIndex) {
+            setSelectedAnswerIndex(null);
+            setIsAnyCheckboxSelected(false);
+        } else {
+            setSelectedAnswerIndex(answerIndex);
+            setIsAnyCheckboxSelected(true);
+        }
     };
+
+    const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const isChecked = event.target.checked;
+        const answerIndex = parseInt(event.target.value, 10);
+
+        if (isChecked) {
+            handleAnswerSelect(answerIndex);
+        } else {
+            setSelectedAnswerIndex(null);
+            setIsAnyCheckboxSelected(false);
+        }
+        if (isAnyCheckboxSelected)
+            onAnswerSelect(-1,questionIndex)
+        else
+            onAnswerSelect(answerIndex,questionIndex)
+
+    };
+
 
     return (
         <div>
@@ -21,20 +52,24 @@ const QuestionComponent = ({ text, answers, onAnswerSelect,questionIndex, correc
             <ul>
                 {answers.map((answer, index) => (
                     <li key={index}>
-                        <button
-                            onClick={() => handleAnswerSelect(index,questionIndex)}
-                        >
+                        <label>
+                            <input
+                                type="checkbox"
+                                value={index}
+                                checked={selectedAnswerIndex === index}
+                                onChange={handleCheckboxChange}
+                            />
                             {answer}
-                        </button>
+                        </label>
                     </li>
                 ))}
             </ul>
             <div>
-            {correctUserResponse ? (
-                <p>Вы ответили правильно!</p>
-            ) : (
-                <p>Вы ответили неправильно.</p>
-            )}
+                {correctUserResponse ? (
+                    <p>Вы ответили правильно!</p>
+                ) : (
+                    <p>Вы ответили неправильно.</p>
+                )}
             </div>
         </div>
     );
