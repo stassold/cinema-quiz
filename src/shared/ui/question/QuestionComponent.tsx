@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { Answer } from "app/types";
 
 interface QuestionProps {
     text: string;
-    answers: Answer[];
-    onAnswerSelect: (answerIndex: number) => void;
+    answers: string[];
+    onAnswerSelect: (answerIndex: number, questionIndex: number) => void;
+    questionIndex: number
+    correctUserResponse: boolean
 }
 
-const QuestionComponent = ({ text, answers, onAnswerSelect }: QuestionProps) => {
-    const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(null);
+const QuestionComponent = ({ text, answers, onAnswerSelect,questionIndex, correctUserResponse }: QuestionProps) => {
 
-    const handleAnswerSelect = (answerIndex: number) => {
-        setSelectedAnswerIndex(answerIndex);
-        onAnswerSelect(answerIndex);
+    const handleAnswerSelect = (answerIndex: number, questionIndex:number) => {
+        console.log('handleAnswerSelect');
+        onAnswerSelect(answerIndex,questionIndex);
     };
 
     return (
@@ -22,14 +22,20 @@ const QuestionComponent = ({ text, answers, onAnswerSelect }: QuestionProps) => 
                 {answers.map((answer, index) => (
                     <li key={index}>
                         <button
-                            onClick={() => handleAnswerSelect(index)}
-                            disabled={selectedAnswerIndex !== null}
+                            onClick={() => handleAnswerSelect(index,questionIndex)}
                         >
                             {answer}
                         </button>
                     </li>
                 ))}
             </ul>
+            <div>
+            {correctUserResponse ? (
+                <p>Вы ответили правильно!</p>
+            ) : (
+                <p>Вы ответили неправильно.</p>
+            )}
+            </div>
         </div>
     );
 };

@@ -1,24 +1,32 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {RootState} from 'redux/store';
-import {selectAnswer, finishQuiz} from 'redux/actions'
+import {selectAnswer, finishQuiz, updateQuestion} from 'redux/actions'
+import QuestionComponent from "shared/ui/question/QuestionComponent";
 
 const QuizComponent = () => {
     const dispatch = useDispatch();
-    const currentQuestions = useSelector(
-        (state: RootState) => state.quiz.questions
-    );
+    const questions = useSelector((state: RootState) => state.quiz.questions);
 
-    const handleAnswerSelect = (answerIndex: number) => {
-        dispatch(selectAnswer(answerIndex));
+    const handleAnswerSelect = (answerIndex: number, questionIndex: number) => {
+        const question = questions[questionIndex];
+        const isCorrect = question.correctAnswerIndex === answerIndex;
+        dispatch(updateQuestion(questionIndex, isCorrect));
     };
 
     return (
         <div>
-            {currentQuestions.map((question, index) => (
-               question.text
+            {questions.map((question, index) => (
+                <QuestionComponent
+                    questionIndex={index}
+                    correctUserResponse={question.correctUserResponse}
+                    key={index}
+                    text={question.text}
+                    answers={question.answers}
+                    onAnswerSelect={handleAnswerSelect}
+                />
             ))}
         </div>
-);
+    );
 };
 
-export default QuizComponent
+export default QuizComponent;

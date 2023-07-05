@@ -1,6 +1,14 @@
 import {QuizState, SelectAnswerPayload} from "app/types";
 import {questions} from "app/data";
 
+interface UpdateQuestionAction {
+    type: 'UPDATE_QUESTION';
+    payload: {
+        questionIndex: number;
+        isCorrect: boolean;
+    };
+}
+
 interface SelectAnswerAction {
     type: 'SELECT_ANSWER';
     payload: SelectAnswerPayload;
@@ -16,6 +24,7 @@ interface FinishQuizAction {
 }
 
 type QuizAction =
+    | UpdateQuestionAction
     | SelectAnswerAction
     | CalculateScoreAction
     | FinishQuizAction;
@@ -39,6 +48,20 @@ const quizReducer = (state = initialState, action: QuizAction): QuizState => {
                         answerIndex: action.payload.answerIndex,
                     },
                 ],
+            };
+        case 'UPDATE_QUESTION':
+            const { questionIndex, isCorrect } = action.payload;
+            return {
+                ...state,
+                questions: state.questions.map((question, index) => {
+                    if (index === questionIndex) {
+                        return {
+                            ...question,
+                            correctUserResponse: isCorrect,
+                        };
+                    }
+                    return question;
+                }),
             };
         case 'CALCULATE_SCORE':
             return {
