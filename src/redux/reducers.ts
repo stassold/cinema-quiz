@@ -1,8 +1,6 @@
 import {QuizState} from "app/types";
 import {questions} from "app/data";
 
-
-
 interface SelectAnswerAction {
     type: 'SELECT_ANSWER';
     payload: number;

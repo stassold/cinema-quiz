@@ -12,3 +12,8 @@ export interface QuizState {
     isFinished: boolean;
     questions: Question[]
 }
+
+export interface SelectAnswerPayload {
+    questionIndex: number;
+    answerIndex: number;
+}
