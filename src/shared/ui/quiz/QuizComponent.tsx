@@ -1,12 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {RootState} from 'redux/store';
 import {nextQuestion, selectAnswer, finishQuiz} from 'redux/actions'
+import {Question} from "app/types";
 
-export interface Question {
-    text: string;
-    answers: string[];
-    correctAnswerIndex: number;
-}
 
 interface QuizProps {
     questions: Question[];
