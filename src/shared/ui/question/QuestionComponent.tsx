@@ -22,9 +22,11 @@ const QuestionComponent = ({
         if (selectedAnswerIndex === answerIndex) {
             setSelectedAnswerIndex(null);
             setIsAnyCheckboxSelected(false);
+            onAnswerSelect(answerIndex,questionIndex);
         } else {
             setSelectedAnswerIndex(answerIndex);
             setIsAnyCheckboxSelected(true);
+            onAnswerSelect(-1,questionIndex);
         }
     };
 
@@ -34,20 +36,21 @@ const QuestionComponent = ({
 
         if (isChecked) {
             handleAnswerSelect(answerIndex);
+            onAnswerSelect(answerIndex,questionIndex)
         } else {
             setSelectedAnswerIndex(null);
             setIsAnyCheckboxSelected(false);
         }
-        if (isAnyCheckboxSelected)
-            onAnswerSelect(-1,questionIndex)
-        else
-            onAnswerSelect(answerIndex,questionIndex)
+    };
 
+    const CheckedSelected = () => {
+        if (!isAnyCheckboxSelected)
+            onAnswerSelect(-1, questionIndex);
     };
 
 
     return (
-        <div>
+        <div onBlur={CheckedSelected}>
             <h2>{text}</h2>
             <ul>
                 {answers.map((answer, index) => (

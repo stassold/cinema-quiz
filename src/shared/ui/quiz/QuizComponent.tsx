@@ -25,6 +25,7 @@ const QuizComponent = () => {
                     onAnswerSelect={handleAnswerSelect}
                 />
             ))}
+            <button>Onclick</button>
         </div>
     );
 };
