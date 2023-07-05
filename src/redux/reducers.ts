@@ -21,7 +21,6 @@ type QuizAction =
     | FinishQuizAction;
 
 const initialState: QuizState = {
-    currentQuestion: 0,
     answers: [],
     score: 0,
     isFinished: false,

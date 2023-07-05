@@ -6,14 +6,18 @@ export interface Question {
 }
 
 export interface QuizState {
-    currentQuestion: number;
-    answers: { questionIndex: number; answerIndex: number }[];
+    answers: Answer[];
     score: number;
     isFinished: boolean;
     questions: Question[]
 }
 
 export interface SelectAnswerPayload {
+    questionIndex: number;
+    answerIndex: number;
+}
+
+export interface Answer {
     questionIndex: number;
     answerIndex: number;
 }
