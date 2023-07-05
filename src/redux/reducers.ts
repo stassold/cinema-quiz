@@ -1,9 +1,9 @@
-import {QuizState} from "app/types";
+import {QuizState, SelectAnswerPayload} from "app/types";
 import {questions} from "app/data";
 
 interface SelectAnswerAction {
     type: 'SELECT_ANSWER';
-    payload: number;
+    payload: SelectAnswerPayload;
 }
 
 interface CalculateScoreAction {
@@ -36,8 +36,8 @@ const quizReducer = (state = initialState, action: QuizAction): QuizState => {
                 answers: [
                     ...state.answers,
                     {
-                        questionIndex: state.currentQuestion,
-                        answerIndex: action.payload,
+                        questionIndex: action.payload.questionIndex,
+                        answerIndex: action.payload.answerIndex,
                     },
                 ],
             };
