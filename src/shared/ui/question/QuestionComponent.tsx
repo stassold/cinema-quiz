@@ -6,6 +6,7 @@ interface QuestionProps {
     onAnswerSelect: (answerIndex: number, questionIndex: number) => void;
     questionIndex: number;
     correctUserResponse: boolean;
+    UserResponse: number | null;
 }
 
 const QuestionComponent = ({

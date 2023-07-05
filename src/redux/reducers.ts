@@ -1,4 +1,4 @@
-import {QuizState, SelectAnswerPayload} from "app/types";
+import {QuizState} from "app/types";
 import {questions} from "app/data";
 
 interface UpdateQuestionAction {
@@ -9,18 +9,27 @@ interface UpdateQuestionAction {
     };
 }
 
+interface SelectAnswerAction {
+    type: 'SELECT_ANSWER';
+    payload: {
+        questionIndexAnswer: number;
+        answerIndex: number;
+    };
+}
 
 interface FinishQuizAction {
     type: 'FINISH_QUIZ';
 }
 
 type QuizAction =
+    | SelectAnswerAction
     | UpdateQuestionAction
     | FinishQuizAction;
 
 const initialState: QuizState = {
     score: 0,
     isFinished: false,
+    selectedAnswers: [],
     questions
 };
 
@@ -40,6 +49,13 @@ const quizReducer = (state = initialState, action: QuizAction): QuizState => {
                     return question;
                 }),
             };
+
+        case 'SELECT_ANSWER':
+            const { questionIndexAnswer, answerIndex } = action.payload;
+            const newSelectedAnswers = [...state.selectedAnswers];
+            newSelectedAnswers[questionIndexAnswer] = answerIndex;
+            return { ...state, selectedAnswers: newSelectedAnswers };
+
         case 'FINISH_QUIZ':
             return {
                 ...state,
