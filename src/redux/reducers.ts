@@ -9,15 +9,6 @@ interface UpdateQuestionAction {
     };
 }
 
-interface SelectAnswerAction {
-    type: 'SELECT_ANSWER';
-    payload: SelectAnswerPayload;
-}
-
-interface CalculateScoreAction {
-    type: 'CALCULATE_SCORE';
-    payload: number;
-}
 
 interface FinishQuizAction {
     type: 'FINISH_QUIZ';
@@ -25,8 +16,6 @@ interface FinishQuizAction {
 
 type QuizAction =
     | UpdateQuestionAction
-    | SelectAnswerAction
-    | CalculateScoreAction
     | FinishQuizAction;
 
 const initialState: QuizState = {
@@ -38,17 +27,6 @@ const initialState: QuizState = {
 
 const quizReducer = (state = initialState, action: QuizAction): QuizState => {
     switch (action.type) {
-        case 'SELECT_ANSWER':
-            return {
-                ...state,
-                answers: [
-                    ...state.answers,
-                    {
-                        questionIndex: action.payload.questionIndex,
-                        answerIndex: action.payload.answerIndex,
-                    },
-                ],
-            };
         case 'UPDATE_QUESTION':
             const { questionIndex, isCorrect } = action.payload;
             return {
@@ -62,11 +40,6 @@ const quizReducer = (state = initialState, action: QuizAction): QuizState => {
                     }
                     return question;
                 }),
-            };
-        case 'CALCULATE_SCORE':
-            return {
-                ...state,
-                score: action.payload,
             };
         case 'FINISH_QUIZ':
             return {

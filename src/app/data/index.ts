@@ -13,6 +13,12 @@ export const questions: Question[] = [
         correctAnswerIndex: 3,
         correctUserResponse: false
     },
+    {
+        text: "Какой язык программирования используется для создания C++?",
+        answers: ["C++", "C3"],
+        correctAnswerIndex: 0,
+        correctUserResponse: false
+    },
     // Добавьте другие вопросы
 ];
 

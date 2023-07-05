@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {RootState} from 'redux/store';
-import {selectAnswer, finishQuiz, updateQuestion} from 'redux/actions'
+import {finishQuiz, updateQuestion} from 'redux/actions'
 import QuestionComponent from "shared/ui/question/QuestionComponent";
 
 const QuizComponent = () => {
