@@ -15,3 +15,5 @@ export const questions: Question[] = [
     },
     // Добавьте другие вопросы
 ];
+
+

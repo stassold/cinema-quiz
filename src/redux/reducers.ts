@@ -1,9 +1,6 @@
-export interface QuizState {
-    currentQuestion: number;
-    answers: { questionIndex: number; answerIndex: number }[];
-    score: number;
-    isFinished: boolean;
-}
+import {QuizState} from "app/types";
+import {questions} from "app/data";
+
 
 
 interface SelectAnswerAction {
@@ -30,6 +27,7 @@ const initialState: QuizState = {
     answers: [],
     score: 0,
     isFinished: false,
+    questions
 };
 
 const quizReducer = (state = initialState, action: QuizAction): QuizState => {
