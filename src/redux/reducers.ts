@@ -5,9 +5,6 @@ export interface QuizState {
     isFinished: boolean;
 }
 
-interface NextQuestionAction {
-    type: 'NEXT_QUESTION';
-}
 
 interface SelectAnswerAction {
     type: 'SELECT_ANSWER';
@@ -24,7 +21,6 @@ interface FinishQuizAction {
 }
 
 type QuizAction =
-    | NextQuestionAction
     | SelectAnswerAction
     | CalculateScoreAction
     | FinishQuizAction;
@@ -38,11 +34,6 @@ const initialState: QuizState = {
 
 const quizReducer = (state = initialState, action: QuizAction): QuizState => {
     switch (action.type) {
-        case 'NEXT_QUESTION':
-            return {
-                ...state,
-                currentQuestion: state.currentQuestion + 1,
-            };
         case 'SELECT_ANSWER':
             return {
                 ...state,

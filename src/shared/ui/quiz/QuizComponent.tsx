@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {RootState} from 'redux/store';
-import {nextQuestion, selectAnswer, finishQuiz} from 'redux/actions'
+import {selectAnswer, finishQuiz} from 'redux/actions'
 import {Question} from "app/types";
 
 
@@ -19,8 +19,6 @@ const QuizComponent = ({ questions }: QuizProps) => {
         dispatch(selectAnswer(answerIndex));
         if (currentQuestion + 1 === questions.length) {
             dispatch(finishQuiz());
-        } else {
-            dispatch(nextQuestion());
         }
     };
 
