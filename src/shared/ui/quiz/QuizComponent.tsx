@@ -4,6 +4,7 @@ import {finishQuiz, updateQuestion} from 'redux/actions'
 import QuestionComponent from "shared/ui/question/QuestionComponent";
 import {useState} from "react";
 import ButtonNavigationComponent from "shared/ui/ButtonNavigation/ButtonNavigationComponent";
+import cls from './QuizComponent.module.scss'
 
 const QuizComponent = () => {
     const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const QuizComponent = () => {
     }
 
     return (
-        <div>
+        <div className={cls.main}>
             {questions.slice(currentPage * 5, currentPage * 5 + 5).map((question, index) => (
                 <QuestionComponent
                     questionIndex={currentPage * 5 + index}

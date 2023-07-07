@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import cls from './QuestionComponent.module.scss'
+import {classNames} from "shared/lib/classNames/classNames";
 
 interface QuestionProps {
     text: string;
@@ -54,11 +56,11 @@ const QuestionComponent = ({
 
 
     return (
-        <div onBlur={CheckedSelected}>
+        <div onBlur={CheckedSelected} className={classNames(cls.main)}>
             <h2>{text}</h2>
-            <ul>
+            <ul className={classNames(cls.answer)}>
                 {answers.map((answer, index) => (
-                    <li key={index}>
+                    <li key={index} >
                         <label>
                             <input
                                 type="checkbox"
@@ -67,17 +69,17 @@ const QuestionComponent = ({
                                 onChange={handleCheckboxChange}
                                 disabled={isFinished}
                             />
-                            {answer}
+                            <span className={classNames(cls.answerText)}>{answer}</span>
                         </label>
                     </li>
                 ))}
             </ul>
             <div>
                 {isFinished && correctUserResponse && (
-                    <p>Вы ответили правильно!</p>
+                    <p className={classNames(cls.success)}>Вы ответили правильно!</p>
                 )}
                 {isFinished && !correctUserResponse && (
-                    <p>Вы ответили неправильно.</p>
+                    <p className={classNames(cls.failed)}>Вы ответили неправильно.</p>
                 )}
             </div>
         </div>
