@@ -3,6 +3,7 @@ import {RootState} from 'redux/store';
 import {finishQuiz, updateQuestion} from 'redux/actions'
 import QuestionComponent from "shared/ui/question/QuestionComponent";
 import {useState} from "react";
+import ButtonNavigationComponent from "shared/ui/ButtonNavigation/ButtonNavigationComponent";
 
 const QuizComponent = () => {
     const dispatch = useDispatch();
@@ -41,13 +42,12 @@ const QuizComponent = () => {
                 />
             ))}
             <div>
-                <button onClick={handlePreviousPage} disabled={currentPage === 0}>
-                    Предыдущая страница
-                </button>
-                <button onClick={handleNextPage} disabled={currentPage === Math.floor(questions.length / 5)}>
-                    Следующая страница
-                </button>
-                <button onClick={handleQuizSubmit}>Завершить</button>
+                <ButtonNavigationComponent handlePreviousPage={handlePreviousPage}
+                                           handleNextPage={handleNextPage}
+                                           handleQuizSubmit={handleQuizSubmit}
+                                           currentPage={currentPage}
+                                           countQuestions={questions.length}
+                />
             </div>
         </div>
     );
