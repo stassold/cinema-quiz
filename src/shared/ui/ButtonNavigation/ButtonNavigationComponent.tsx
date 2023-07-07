@@ -8,6 +8,7 @@ interface ButtonNavigationProps {
     currentPage: number;
     countQuestions: number;
     isFinished: boolean;
+    score: number;
 }
 
 const ButtonNavigationComponent = ({
@@ -15,15 +16,18 @@ const ButtonNavigationComponent = ({
     handleNextPage,
     handleQuizSubmit,
     currentPage,
-    countQuestions
+    countQuestions,
+    isFinished,
+    score
 }: ButtonNavigationProps ) => {
 
     return(
         <div>
             <Button onClick={handlePreviousPage} disabled={currentPage === 0}>Предыдущая страница</Button>
             <Button onClick={handleNextPage} disabled={currentPage === Math.ceil(countQuestions / 5) - 1}> Следующая страница</Button>
-            <Button onClick={handleQuizSubmit}>Завершить</Button>
-
+            <Button onClick={handleQuizSubmit} disabled={isFinished}>Завершить</Button>
+            <a href={'/'}>Начать заного</a>
+            {isFinished && <div> Ваши очки {score}</div>}
         </div>
     )
 

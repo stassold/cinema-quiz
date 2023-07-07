@@ -51,6 +51,7 @@ const QuizComponent = () => {
                                            currentPage={currentPage}
                                            countQuestions={questions.length}
                                            isFinished={isFinished}
+                                           score={score}
                 />
             </div>
         </div>

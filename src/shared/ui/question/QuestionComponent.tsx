@@ -65,6 +65,7 @@ const QuestionComponent = ({
                                 value={index}
                                 checked={selectedAnswerIndex === index}
                                 onChange={handleCheckboxChange}
+                                disabled={isFinished}
                             />
                             {answer}
                         </label>
