@@ -17,7 +17,7 @@ export const questions: Question[] = [
     },
     {
         text: "Какой фильм получил премию Оскар в 2021 году?",
-        answers: ["Номадлэнд", "Отец", "Манк", "Прочь", "Земля кочевников"],
+        answers: ["Номадлэнд", "Отец", "Манк"],
         correctAnswerIndex: 0,
         correctUserResponse: false,
         userAnswer: null
@@ -31,7 +31,7 @@ export const questions: Question[] = [
     },
     {
         text: "Какой фильм Чарли Чаплина получил пять номинаций на премию Оскар и выиграл только одну?",
-        answers: ["Огни большого города", "Золотая лихорадка", "Король воздуха", "Светская львица", "Модерн Таймс"],
+        answers: ["Золотая лихорадка", "Король воздуха", "Светская львица", "Модерн Таймс"],
         correctAnswerIndex: 4,
         correctUserResponse: false,
         userAnswer: null,
