@@ -9,7 +9,6 @@ export interface Question {
 export interface QuizState {
     score: number;
     isFinished: boolean;
-    selectedAnswers: number[]
     questions: Question[]
 }
 

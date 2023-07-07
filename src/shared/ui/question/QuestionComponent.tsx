@@ -3,7 +3,7 @@ import React, { useState } from "react";
 interface QuestionProps {
     text: string;
     answers: string[];
-    onAnswerSelect: (answerIndex: number, questionIndex: number) => void;
+    onAnswerSelect: (answerIndex: number, questionIndex: number, userAnswer: number | null) => void;
     questionIndex: number;
     correctUserResponse: boolean;
     userAnswer: number | null;
@@ -17,18 +17,18 @@ const QuestionComponent = ({
                                correctUserResponse,
                                userAnswer
                            }: QuestionProps) => {
-    const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(null);
+    const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(userAnswer);
     const [isAnyCheckboxSelected, setIsAnyCheckboxSelected] = useState(false);
 
     const handleAnswerSelect = (answerIndex: number) => {
         if (selectedAnswerIndex === answerIndex) {
             setSelectedAnswerIndex(null);
             setIsAnyCheckboxSelected(false);
-            onAnswerSelect(answerIndex,questionIndex);
+            onAnswerSelect(answerIndex,questionIndex, selectedAnswerIndex);
         } else {
             setSelectedAnswerIndex(answerIndex);
             setIsAnyCheckboxSelected(true);
-            onAnswerSelect(-1,questionIndex);
+            onAnswerSelect(-1,questionIndex, null);
         }
     };
 
@@ -38,7 +38,7 @@ const QuestionComponent = ({
 
         if (isChecked) {
             handleAnswerSelect(answerIndex);
-            onAnswerSelect(answerIndex,questionIndex)
+            onAnswerSelect(answerIndex,questionIndex,selectedAnswerIndex )
         } else {
             setSelectedAnswerIndex(null);
             setIsAnyCheckboxSelected(false);
@@ -47,7 +47,7 @@ const QuestionComponent = ({
 
     const CheckedSelected = () => {
         if (!isAnyCheckboxSelected)
-            onAnswerSelect(-1, questionIndex, selectedAnswerIndex);
+            onAnswerSelect(-1, questionIndex, null);
     };
 
 
