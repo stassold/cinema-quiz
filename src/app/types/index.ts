@@ -12,7 +12,3 @@ export interface QuizState {
     questions: Question[]
 }
 
-export interface SelectAnswerPayload {
-    questionIndex: number;
-    answerIndex: number;
-}

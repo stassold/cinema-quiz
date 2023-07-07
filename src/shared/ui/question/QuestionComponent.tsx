@@ -25,9 +25,9 @@ const QuestionComponent = ({
             setSelectedAnswerIndex(null);
             setIsAnyCheckboxSelected(false);
         } else {
+
             setSelectedAnswerIndex(answerIndex);
             setIsAnyCheckboxSelected(true);
-            onAnswerSelect(-1,questionIndex, null);
         }
     };
 
@@ -36,9 +36,10 @@ const QuestionComponent = ({
         const answerIndex = parseInt(event.target.value, 10);
 
         if (isChecked) {
+            onAnswerSelect(answerIndex,questionIndex,selectedAnswerIndex)
             handleAnswerSelect(answerIndex);
-            onAnswerSelect(answerIndex,questionIndex,selectedAnswerIndex )
         } else {
+            onAnswerSelect(-1,questionIndex,null)
             setSelectedAnswerIndex(null);
             setIsAnyCheckboxSelected(false);
         }
@@ -74,6 +75,7 @@ const QuestionComponent = ({
                 ) : (
                     <p>Вы ответили неправильно.</p>
                 )}
+                {<p>Вы выбрали {userAnswer}</p>}
             </div>
         </div>
     );

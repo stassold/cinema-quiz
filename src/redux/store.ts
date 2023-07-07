@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import {combineReducers, applyMiddleware, legacy_createStore} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import quizReducer from './reducers';
@@ -14,6 +14,6 @@ const rootReducer = combineReducers<RootState>({
 
 const enhancer = composeWithDevTools(applyMiddleware(thunk));
 
-const store = createStore(rootReducer, enhancer);
+const store = legacy_createStore(rootReducer, enhancer);
 
 export default store;
