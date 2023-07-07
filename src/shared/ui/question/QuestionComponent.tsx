@@ -6,7 +6,7 @@ interface QuestionProps {
     onAnswerSelect: (answerIndex: number, questionIndex: number) => void;
     questionIndex: number;
     correctUserResponse: boolean;
-    UserResponse: number | null;
+    userAnswer: number | null;
 }
 
 const QuestionComponent = ({
@@ -15,6 +15,7 @@ const QuestionComponent = ({
                                onAnswerSelect,
                                questionIndex,
                                correctUserResponse,
+                               userAnswer
                            }: QuestionProps) => {
     const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(null);
     const [isAnyCheckboxSelected, setIsAnyCheckboxSelected] = useState(false);
@@ -46,7 +47,7 @@ const QuestionComponent = ({
 
     const CheckedSelected = () => {
         if (!isAnyCheckboxSelected)
-            onAnswerSelect(-1, questionIndex);
+            onAnswerSelect(-1, questionIndex, selectedAnswerIndex);
     };
 
 
