@@ -20,7 +20,7 @@ const ButtonNavigationComponent = ({
     return(
         <div>
             <Button onClick={handlePreviousPage} disabled={currentPage === 0}>Предыдущая страница</Button>
-            <Button onClick={handleNextPage} disabled={currentPage === Math.floor(countQuestions / 5) - 1}> Следующая страница</Button>
+            <Button onClick={handleNextPage} disabled={currentPage === Math.ceil(countQuestions / 5) - 1}> Следующая страница</Button>
             <Button onClick={handleQuizSubmit}>Завершить</Button>
 
         </div>

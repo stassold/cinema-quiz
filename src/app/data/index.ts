@@ -70,6 +70,6 @@ export const questions: Question[] = [
         correctAnswerIndex: 1,
         correctUserResponse: false,
         userAnswer: null,
-    },
+    }
 ];
 
