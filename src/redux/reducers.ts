@@ -42,10 +42,18 @@ const quizReducer = (state = initialState, action: QuizAction): QuizState => {
                 }),
             };
         case 'FINISH_QUIZ':
-            return {
-                ...state,
-                isFinished: true,
-            };
+                const correctAnswersCount = state.questions.reduce((count, question) => {
+                    if (question.correctUserResponse) {
+                        return count + 1;
+                    } else {
+                        return count;
+                    }
+                }, 0);
+                return {
+                    ...state,
+                    isFinished: true,
+                    score: correctAnswersCount
+                };
         default:
             return state;
     }

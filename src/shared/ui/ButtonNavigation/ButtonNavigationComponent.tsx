@@ -7,6 +7,7 @@ interface ButtonNavigationProps {
     handleQuizSubmit: () => void;
     currentPage: number;
     countQuestions: number;
+    isFinished: boolean;
 }
 
 const ButtonNavigationComponent = ({

@@ -7,6 +7,7 @@ interface QuestionProps {
     questionIndex: number;
     correctUserResponse: boolean;
     userAnswer: number | null;
+    isFinished: boolean;
 }
 
 const QuestionComponent = ({
@@ -15,7 +16,8 @@ const QuestionComponent = ({
                                onAnswerSelect,
                                questionIndex,
                                correctUserResponse,
-                               userAnswer
+                               userAnswer,
+                               isFinished
                            }: QuestionProps) => {
     const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(userAnswer);
     const [isAnyCheckboxSelected, setIsAnyCheckboxSelected] = useState(false);
@@ -70,12 +72,12 @@ const QuestionComponent = ({
                 ))}
             </ul>
             <div>
-                {correctUserResponse ? (
+                {isFinished && correctUserResponse && (
                     <p>Вы ответили правильно!</p>
-                ) : (
+                )}
+                {isFinished && !correctUserResponse && (
                     <p>Вы ответили неправильно.</p>
                 )}
-                {<p>Вы выбрали {userAnswer}</p>}
             </div>
         </div>
     );

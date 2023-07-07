@@ -8,6 +8,8 @@ import ButtonNavigationComponent from "shared/ui/ButtonNavigation/ButtonNavigati
 const QuizComponent = () => {
     const dispatch = useDispatch();
     const questions = useSelector((state: RootState) => state.quiz.questions);
+    const isFinished = useSelector((state: RootState) => state.quiz.isFinished);
+    const score = useSelector((state: RootState) => state.quiz.score);
     const [currentPage, setCurrentPage] = useState(0);
 
     const handleAnswerSelect = (answerIndex: number, questionIndex: number, userAnswer: number | null) => {
@@ -25,7 +27,7 @@ const QuizComponent = () => {
     };
 
     const handleQuizSubmit = () => {
-
+        dispatch(finishQuiz());
     }
 
     return (
@@ -39,6 +41,7 @@ const QuizComponent = () => {
                     answers={question.answers}
                     onAnswerSelect={handleAnswerSelect}
                     userAnswer={question.userAnswer}
+                    isFinished={isFinished}
                 />
             ))}
             <div>
@@ -47,6 +50,7 @@ const QuizComponent = () => {
                                            handleQuizSubmit={handleQuizSubmit}
                                            currentPage={currentPage}
                                            countQuestions={questions.length}
+                                           isFinished={isFinished}
                 />
             </div>
         </div>
