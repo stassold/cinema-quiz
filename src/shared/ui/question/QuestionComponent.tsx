@@ -24,7 +24,6 @@ const QuestionComponent = ({
         if (selectedAnswerIndex === answerIndex) {
             setSelectedAnswerIndex(null);
             setIsAnyCheckboxSelected(false);
-            onAnswerSelect(answerIndex,questionIndex, selectedAnswerIndex);
         } else {
             setSelectedAnswerIndex(answerIndex);
             setIsAnyCheckboxSelected(true);
