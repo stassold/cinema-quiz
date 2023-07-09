@@ -6,7 +6,7 @@ interface UpdateQuestionAction {
     payload: {
         questionIndex: number;
         isCorrect: boolean;
-        answerUser: number | null;
+        userAnswer: number | null;
     };
 }
 
@@ -27,7 +27,7 @@ const initialState: QuizState = {
 const quizReducer = (state = initialState, action: QuizAction): QuizState => {
     switch (action.type) {
         case 'UPDATE_QUESTION':
-            const { questionIndex, isCorrect, answerUser } = action.payload;
+            const { questionIndex, isCorrect, userAnswer } = action.payload;
             return {
                 ...state,
                 questions: state.questions.map((question, index) => {
@@ -35,10 +35,13 @@ const quizReducer = (state = initialState, action: QuizAction): QuizState => {
                         return {
                             ...question,
                             correctUserResponse: isCorrect,
-                            userAnswer: answerUser
+                            userAnswer: userAnswer
                         };
                     }
-                    return question;
+                    return {
+                        ...question,
+                        userAnswer: question.userAnswer
+                    };
                 }),
             };
         case 'FINISH_QUIZ':

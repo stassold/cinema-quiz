@@ -29,7 +29,6 @@ const QuestionComponent = ({
             setSelectedAnswerIndex(null);
             setIsAnyCheckboxSelected(false);
         } else {
-
             setSelectedAnswerIndex(answerIndex);
             setIsAnyCheckboxSelected(true);
         }
@@ -40,7 +39,7 @@ const QuestionComponent = ({
         const answerIndex = parseInt(event.target.value, 10);
 
         if (isChecked) {
-            onAnswerSelect(answerIndex,questionIndex,selectedAnswerIndex)
+            onAnswerSelect(answerIndex,questionIndex,answerIndex)
             handleAnswerSelect(answerIndex);
         } else {
             onAnswerSelect(-1,questionIndex,null)

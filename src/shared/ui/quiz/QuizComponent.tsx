@@ -16,7 +16,7 @@ const QuizComponent = () => {
     const handleAnswerSelect = (answerIndex: number, questionIndex: number, userAnswer: number | null) => {
         const question = questions[questionIndex];
         const isCorrect = question.correctAnswerIndex === answerIndex;
-        dispatch(updateQuestion(questionIndex, isCorrect,userAnswer));
+        dispatch(updateQuestion(questionIndex, isCorrect, userAnswer));
     };
 
     const handlePreviousPage = () => {

@@ -32,7 +32,7 @@ export const questions: Question[] = [
     {
         text: "Какой фильм Чарли Чаплина получил пять номинаций на премию Оскар и выиграл только одну?",
         answers: ["Золотая лихорадка", "Король воздуха", "Светская львица", "Модерн Таймс"],
-        correctAnswerIndex: 4,
+        correctAnswerIndex: 3,
         correctUserResponse: false,
         userAnswer: null,
     },
