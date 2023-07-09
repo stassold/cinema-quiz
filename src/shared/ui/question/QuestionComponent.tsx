@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React  from "react";
 import cls from './QuestionComponent.module.scss'
 import {classNames} from "shared/lib/classNames/classNames";
+import {useCheckboxHandler} from "shared/hook/useCheckboxHandler";
 
 interface QuestionProps {
     text: string;
@@ -21,36 +22,12 @@ const QuestionComponent = ({
                                userAnswer,
                                isFinished
                            }: QuestionProps) => {
-    const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(userAnswer);
-    const [isAnyCheckboxSelected, setIsAnyCheckboxSelected] = useState(false);
-
-    const handleAnswerSelect = (answerIndex: number) => {
-        if (selectedAnswerIndex === answerIndex) {
-            setSelectedAnswerIndex(null);
-            setIsAnyCheckboxSelected(false);
-        } else {
-            setSelectedAnswerIndex(answerIndex);
-            setIsAnyCheckboxSelected(true);
-        }
-    };
-
-    const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const isChecked = event.target.checked;
-        const answerIndex = parseInt(event.target.value, 10);
-
-        if (isChecked) {
-            onAnswerSelect(answerIndex,questionIndex,answerIndex)
-            handleAnswerSelect(answerIndex);
-        } else {
-            onAnswerSelect(-1,questionIndex,null)
-            setSelectedAnswerIndex(null);
-            setIsAnyCheckboxSelected(false);
-        }
-    };
+    const [checkedIndex, HookHandleCheckboxChange] = useCheckboxHandler(userAnswer);
 
     const CheckedSelected = () => {
-        if (!isAnyCheckboxSelected)
-            onAnswerSelect(-1, questionIndex, null);
+        if (checkedIndex !== null) {
+            onAnswerSelect(checkedIndex, questionIndex,checkedIndex);
+        }
     };
 
 
@@ -64,8 +41,8 @@ const QuestionComponent = ({
                             <input
                                 type="checkbox"
                                 value={index}
-                                checked={selectedAnswerIndex === index}
-                                onChange={handleCheckboxChange}
+                                checked={checkedIndex === index}
+                                onChange={HookHandleCheckboxChange}
                                 disabled={isFinished}
                             />
                             <span className={classNames(cls.answerText)}>{answer}</span>
