@@ -18,6 +18,7 @@ export interface SetAuthAction extends Action<'SET_AUTH'> {
 export interface FinishQuizAction extends Action<'FINISH_QUIZ'> {}
 
 export type QuizAction =
+    | SetAuthAction
     | UpdateQuestionAction
     | FinishQuizAction;
 
