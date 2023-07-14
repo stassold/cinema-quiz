@@ -10,17 +10,26 @@ interface UpdateQuestionAction {
     };
 }
 
+interface SetAuthAction {
+    type: 'SET_AUTH'
+    payload: {
+        isAuth: boolean;
+    }
+}
+
 interface FinishQuizAction {
     type: 'FINISH_QUIZ';
 }
 
 type QuizAction =
+    | SetAuthAction
     | UpdateQuestionAction
     | FinishQuizAction;
 
 const initialState: QuizState = {
     score: 0,
     isFinished: false,
+    isAuth: false,
     questions
 };
 
@@ -57,6 +66,11 @@ const quizReducer = (state = initialState, action: QuizAction): QuizState => {
                     isFinished: true,
                     score: correctAnswersCount
                 };
+        case 'SET_AUTH':
+            return {
+                ...state,
+                isAuth: action.payload.isAuth
+            };
         default:
             return state;
     }

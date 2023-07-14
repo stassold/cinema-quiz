@@ -9,6 +9,7 @@ export interface Question {
 export interface QuizState {
     score: number;
     isFinished: boolean;
-    questions: Question[]
+    questions: Question[];
+    isAuth: boolean;
 }
 

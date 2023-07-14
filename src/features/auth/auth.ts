@@ -11,8 +11,6 @@ interface LoginData {
     password: string;
 }
 
-
-
 export function login(data: LoginData): Promise<LoginResponse> {
     return axios.post<LoginResponse>('http://localhost:3010/login', data)
         .then((response: AxiosResponse<LoginResponse>) => response.data)

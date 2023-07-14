@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import './ModalComponent.module.scss';
+import './ModalComponent.scss';
+
 
 interface ModalProps {
     isOpen: boolean;
