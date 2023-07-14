@@ -3,11 +3,12 @@ import {Button, Layout} from 'antd'
 import cls from './HeaderComponent.module.scss'
 import {classNames} from "shared/lib/classNames/classNames";
 import {useDispatch} from "react-redux";
-import {setAuth} from "redux/actions";
+import {finishQuiz, setAuth} from "redux/actions";
 import {Modal} from 'antd'
 import AuthFormComponent from "shared/ui/AuthForm/AuthFormComponent";
 import {FormData} from "shared/ui/AuthForm/AuthFormComponent";
 import {signup, login} from "features/auth/auth";
+import Timer from "features/timer/Timer";
 
 const {Header} = Layout
 
@@ -62,9 +63,13 @@ const HeaderComponent = ({isAuth}: HeaderProps ) => {
 
     }
 
+    const onTimeUp = () => {
+        dispatch(finishQuiz())
+    }
 
     return (
         <Header className={classNames(cls.main)}>
+            {isAuth && <div className={classNames(cls.timer)}> <Timer maxTime={30} onTimeUp={onTimeUp}/></div>}
             {isAuth ? <Button onClick={handeButtonLogout}>Выйти</Button> : <Button onClick={handeButtonLogin}>Войти</Button>}
             {!isAuth && <Button onClick={handleButtonReg}>Зарегистрироваться</Button>}
             <Modal open={isModalOpen} onCancel={closeModal} footer={null}>
