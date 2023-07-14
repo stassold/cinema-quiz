@@ -7,6 +7,7 @@ import {setAuth} from "redux/actions";
 import {Modal} from 'antd'
 import AuthFormComponent from "shared/ui/AuthForm/AuthFormComponent";
 import {FormData} from "shared/ui/AuthForm/AuthFormComponent";
+import {signup, login} from "features/auth/auth";
 
 const {Header} = Layout
 
@@ -32,6 +33,15 @@ const HeaderComponent = ({isAuth}: HeaderProps ) => {
     const handleSubmit = (formData: FormData) => {
         console.log(formData);
         setIsModalOpen(false);
+        if(isReg)
+            signup(formData)
+        else
+            login(formData).then(data => {
+                    localStorage.setItem('access_token', data.access_token);
+                    localStorage.setItem('refresh_token', data.refresh_token);
+                    dispatch(setAuth(true))
+            }
+            )
         // Отправить данные формы на сервер или выполнить другие действия
     };
 
@@ -45,11 +55,18 @@ const HeaderComponent = ({isAuth}: HeaderProps ) => {
         setIsReg(false);
     }
 
+    const handeButtonLogout = () => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        onLogout(false);
+
+    }
+
 
     return (
         <Header className={classNames(cls.main)}>
-            {isAuth ? <Button onClick={() => onLogout(false)}>Выйти</Button> : <Button onClick={handeButtonLogin}>Войти</Button>}
-            <Button onClick={handleButtonReg}>Зарегистрироваться</Button>
+            {isAuth ? <Button onClick={handeButtonLogout}>Выйти</Button> : <Button onClick={handeButtonLogin}>Войти</Button>}
+            {!isAuth && <Button onClick={handleButtonReg}>Зарегистрироваться</Button>}
             <Modal open={isModalOpen} onCancel={closeModal} footer={null}>
                 <AuthFormComponent onSubmit={handleSubmit} nameSubmit={isReg ? 'Зарегистрироваться' : 'Войти'}/>
                 <button onClick={closeModal}>Закрыть</button>
