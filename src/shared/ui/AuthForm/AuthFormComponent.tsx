@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import {classNames} from "shared/lib/classNames/classNames";
+import cls from "./AuthFormComponent.module.scss"
 
 interface FormProps {
     onSubmit: (formData: FormData) => void;
@@ -27,8 +29,8 @@ function AuthForm(props: FormProps) {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label>
+        <form onSubmit={handleSubmit} className={classNames(cls.formAuth)}>
+            <label className={classNames(cls.formLabel)}>
                 Email:
                 <input
                     type="email"
@@ -37,7 +39,7 @@ function AuthForm(props: FormProps) {
                     required
                 />
             </label>
-            <label>
+            <label className={classNames(cls.formLabel)}>
                 Password:
                 <input
                     type="password"

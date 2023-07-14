@@ -69,11 +69,11 @@ const HeaderComponent = ({isAuth}: HeaderProps ) => {
 
     return (
         <Header className={classNames(cls.main)}>
-            {isAuth && <div className={classNames(cls.timer)}> <Timer maxTime={30} onTimeUp={onTimeUp}/></div>}
+            {isAuth && <div className={classNames(cls.timer)}> <Timer maxTime={600} onTimeUp={onTimeUp}/></div>}
             {isAuth ? <Button onClick={handeButtonLogout}>Выйти</Button> : <Button onClick={handeButtonLogin}>Войти</Button>}
             {!isAuth && <Button onClick={handleButtonReg}>Зарегистрироваться</Button>}
-            <Modal open={isModalOpen} onCancel={closeModal} footer={null}>
-                <AuthFormComponent onSubmit={handleSubmit} nameSubmit={isReg ? 'Зарегистрироваться' : 'Войти'}/>
+            <Modal  open={isModalOpen} onCancel={closeModal} footer={null}>
+                <AuthFormComponent  onSubmit={handleSubmit} nameSubmit={isReg ? 'Зарегистрироваться' : 'Войти'}/>
                 <button onClick={closeModal}>Закрыть</button>
             </Modal>
         </Header>
