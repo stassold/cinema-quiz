@@ -13,7 +13,7 @@ export function App() {
     return (
         <div>
             <HeaderComponent isAuth={isAuth}/>
-            <MainComponent/>
+            <MainComponent isAuth={isAuth}/>
             <FooterComponent/>
         </div>
     );

@@ -4,13 +4,15 @@ import {classNames} from "shared/lib/classNames/classNames";
 import QuizComponent from "shared/ui/quiz/QuizComponent";
 
 
+interface MainProps {
+    isAuth: boolean
+}
 
-
-const MainComponent = () => {
+const MainComponent = ({isAuth}: MainProps ) => {
 
     return (
         <main className={classNames(cls.main)}>
-            <QuizComponent/>
+            {isAuth ? <QuizComponent/> : <div className={classNames(cls.noAuth)}>Вы не авторизованы</div>}
         </main>
     )
 
