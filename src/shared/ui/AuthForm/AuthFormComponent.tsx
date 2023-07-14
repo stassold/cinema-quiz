@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 
 interface FormProps {
-    onSubmit: (data: FormData) => void;
+    onSubmit: (formData: FormData) => void;
+    nameSubmit: string;
 }
 
-interface FormData {
+export interface FormData {
     email: string;
     password: string;
 }
 
 function AuthForm(props: FormProps) {
+    const nameSubmit = props.nameSubmit
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -42,7 +44,7 @@ function AuthForm(props: FormProps) {
                     required
                 />
             </label>
-            <button type="submit">Submit</button>
+            <button type="submit">{nameSubmit}</button>
         </form>
     );
 }

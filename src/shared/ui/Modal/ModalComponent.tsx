@@ -52,7 +52,10 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
     return ReactDOM.createPortal(
         <div className="modal">
-            <div className="modal__overlay" onClick={onClose} />
+            <div className="modal__overlay" onClick={(event) => {
+                event.stopPropagation();
+                onClose();
+            }} />
             <div className="modal__content">{children}</div>
             <button className="modal__close" onClick={onClose}>
                 &times;
