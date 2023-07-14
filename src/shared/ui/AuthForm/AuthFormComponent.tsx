@@ -21,6 +21,8 @@ function AuthForm(props: FormProps) {
             email,
             password,
         };
+        setEmail('');
+        setPassword('');
         props.onSubmit(formData);
     };
 
