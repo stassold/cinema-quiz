@@ -2,6 +2,8 @@ import React from "react";
 import {Button} from "antd";
 import cls from './ButtonNavigation.module.scss'
 import {classNames} from "shared/lib/classNames/classNames";
+import {useDispatch} from "react-redux";
+import {resetState} from "redux/actions";
 
 interface ButtonNavigationProps {
     handlePreviousPage: () => void;
@@ -23,12 +25,18 @@ const ButtonNavigationComponent = ({
     score
 }: ButtonNavigationProps ) => {
 
+    const dispatch = useDispatch();
+
+    const handleResetSumbit = () => {
+        dispatch(resetState());
+    }
+
     return(
         <div className={classNames(cls.main)}>
             <Button onClick={handlePreviousPage} disabled={currentPage === 0}>Предыдущая страница</Button>
             <Button onClick={handleNextPage} disabled={currentPage === Math.ceil(countQuestions / 5) - 1}> Следующая страница</Button>
             <Button type={"primary"} onClick={handleQuizSubmit} disabled={isFinished}>Завершить</Button>
-            <a href={'/'}>Начать заного</a>
+            <Button onClick={handleResetSumbit}>Начать заного</Button>
             {isFinished && <div> Ваши очки {score}</div>}
         </div>
     )
