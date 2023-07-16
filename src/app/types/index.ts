@@ -12,6 +12,7 @@ export interface QuizState {
     questions: Question[];
     isAuth: boolean;
     time: number;
+    countReset:number;
 }
 
 export const UPDATE_QUESTION = 'UPDATE_QUESTION';

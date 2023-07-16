@@ -36,6 +36,7 @@ const initialState: QuizState = {
     isFinished: false,
     isAuth: false,
     time: 300,
+    countReset: 0,
     questions
 };
 
@@ -80,6 +81,7 @@ const quizReducer = (state = initialState, action: QuizAction): QuizState => {
         case RESET_STATE:
             return {
                 ...initialState,
+                countReset: state.countReset + 1,
                 isAuth: true,
             };
         default:

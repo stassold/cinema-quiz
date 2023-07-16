@@ -1,28 +1,32 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Layout} from 'antd'
 import cls from './HeaderComponent.module.scss'
 import {classNames} from "shared/lib/classNames/classNames";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {finishQuiz, setAuth} from "redux/actions";
 import {Modal} from 'antd'
 import AuthFormComponent from "shared/ui/AuthForm/AuthFormComponent";
 import {FormData} from "shared/ui/AuthForm/AuthFormComponent";
 import {signup, login} from "features/auth/auth";
 import Timer from "features/timer/Timer";
+import {RootState} from "redux/store";
 
 const {Header} = Layout
 
 interface HeaderProps {
     isAuth: boolean;
-    time: number;
 }
 
-const HeaderComponent = ({isAuth, time}: HeaderProps ) => {
+const HeaderComponent = ({isAuth}: HeaderProps ) => {
     const dispatch = useDispatch();
     const onLogout = (isAuth: boolean) => {
         dispatch(setAuth(isAuth))
     }
 
+    const Time = useSelector((state: RootState) => state.quiz.time);
+    const countReset = useSelector((state: RootState) => state.quiz.countReset);
+
+    const [time,setTime] = useState(Time);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isReg, setIsReg] = useState(false);
     const openModal = () => {
@@ -31,6 +35,11 @@ const HeaderComponent = ({isAuth, time}: HeaderProps ) => {
     const closeModal = () => {
         setIsModalOpen(false);
     };
+
+    useEffect(() => {
+        // Обновляем значение таймера, если произошел сброс состояния
+       setTime(Time)
+    }, [countReset]);
 
     const handleSubmit = (formData: FormData) => {
         setIsModalOpen(false);
@@ -69,11 +78,11 @@ const HeaderComponent = ({isAuth, time}: HeaderProps ) => {
 
     return (
         <Header className={classNames(cls.main)}>
-            {isAuth && <div className={classNames(cls.timer)}> <Timer maxTime={time} onTimeUp={onTimeUp}/></div>}
+            {isAuth &&  <div className={classNames(cls.timer)}> <Timer maxTime={time} onTimeUp={onTimeUp}/></div>}
             {isAuth ? <Button onClick={handeButtonLogout}>Выйти</Button> : <Button onClick={handeButtonLogin}>Войти</Button>}
             {!isAuth && <Button onClick={handleButtonReg}>Зарегистрироваться</Button>}
             <Modal  open={isModalOpen} onCancel={closeModal} footer={null}>
-                <AuthFormComponent  onSubmit={handleSubmit} nameSubmit={isReg ? 'Зарегистрироваться' : 'Войти'}/>
+                <AuthFormComponent onSubmit={handleSubmit} nameSubmit={isReg ? 'Зарегистрироваться' : 'Войти'}/>
                 <button onClick={closeModal}>Закрыть</button>
             </Modal>
         </Header>
