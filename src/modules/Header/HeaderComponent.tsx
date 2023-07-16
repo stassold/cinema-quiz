@@ -32,15 +32,14 @@ const HeaderComponent = ({isAuth}: HeaderProps ) => {
     };
 
     const handleSubmit = (formData: FormData) => {
-        console.log(formData);
         setIsModalOpen(false);
         if(isReg)
             signup(formData)
         else
             login(formData).then(data => {
-                    localStorage.setItem('access_token', data.access_token);
-                    localStorage.setItem('refresh_token', data.refresh_token);
-                    dispatch(setAuth(true))
+                localStorage.setItem('access_token', data.access_token);
+                localStorage.setItem('refresh_token', data.refresh_token);
+                dispatch(setAuth(true))
             }
             )
         // Отправить данные формы на сервер или выполнить другие действия

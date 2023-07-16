@@ -13,3 +13,7 @@ export interface QuizState {
     isAuth: boolean;
 }
 
+export const UPDATE_QUESTION = 'UPDATE_QUESTION';
+export const SET_AUTH = 'SET_AUTH';
+export const FINISH_QUIZ = 'FINISH_QUIZ';
+

@@ -1,8 +1,9 @@
 import {QuizState} from "app/types";
 import {questions} from "app/data";
+import {FINISH_QUIZ, SET_AUTH, UPDATE_QUESTION} from "app/types";
 
 interface UpdateQuestionAction {
-    type: 'UPDATE_QUESTION';
+    type: typeof UPDATE_QUESTION;
     payload: {
         questionIndex: number;
         isCorrect: boolean;
@@ -11,14 +12,14 @@ interface UpdateQuestionAction {
 }
 
 interface SetAuthAction {
-    type: 'SET_AUTH'
+    type: typeof SET_AUTH;
     payload: {
         isAuth: boolean;
     }
 }
 
 interface FinishQuizAction {
-    type: 'FINISH_QUIZ';
+    type: typeof FINISH_QUIZ;
 }
 
 type QuizAction =
@@ -35,7 +36,7 @@ const initialState: QuizState = {
 
 const quizReducer = (state = initialState, action: QuizAction): QuizState => {
     switch (action.type) {
-        case 'UPDATE_QUESTION':
+        case  UPDATE_QUESTION:
             const { questionIndex, isCorrect, userAnswer } = action.payload;
             return {
                 ...state,
@@ -53,7 +54,7 @@ const quizReducer = (state = initialState, action: QuizAction): QuizState => {
                     };
                 }),
             };
-        case 'FINISH_QUIZ':
+        case FINISH_QUIZ:
                 const correctAnswersCount = state.questions.reduce((count, question) => {
                     if (question.correctUserResponse) {
                         return count + 1;
@@ -66,7 +67,7 @@ const quizReducer = (state = initialState, action: QuizAction): QuizState => {
                     isFinished: true,
                     score: correctAnswersCount
                 };
-        case 'SET_AUTH':
+        case SET_AUTH:
             return {
                 ...state,
                 isAuth: action.payload.isAuth
