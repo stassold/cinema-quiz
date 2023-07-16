@@ -1,6 +1,6 @@
 import {QuizState} from "app/types";
 import {questions} from "app/data";
-import {FINISH_QUIZ, SET_AUTH, UPDATE_QUESTION} from "app/types";
+import {FINISH_QUIZ, SET_AUTH, UPDATE_QUESTION, RESET_STATE} from "app/types";
 
 interface UpdateQuestionAction {
     type: typeof UPDATE_QUESTION;
@@ -21,10 +21,14 @@ interface SetAuthAction {
 interface FinishQuizAction {
     type: typeof FINISH_QUIZ;
 }
+interface ResetStateAction {
+    type: typeof RESET_STATE;
+}
 
 type QuizAction =
     | SetAuthAction
     | UpdateQuestionAction
+    | ResetStateAction
     | FinishQuizAction;
 
 const initialState: QuizState = {
@@ -72,6 +76,8 @@ const quizReducer = (state = initialState, action: QuizAction): QuizState => {
                 ...state,
                 isAuth: action.payload.isAuth
             };
+        case RESET_STATE:
+            return initialState;
         default:
             return state;
     }

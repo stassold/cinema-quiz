@@ -1,4 +1,4 @@
-import {FINISH_QUIZ, SET_AUTH, UPDATE_QUESTION} from "app/types";
+import {FINISH_QUIZ, SET_AUTH, UPDATE_QUESTION, RESET_STATE} from "app/types";
 
 export interface UpdateQuestionAction {
     type: typeof UPDATE_QUESTION;
@@ -20,6 +20,11 @@ export interface FinishQuizAction {
     type: typeof FINISH_QUIZ;
 }
 
+export interface SetResetAction {
+    type: typeof RESET_STATE;
+}
+
+
 export type QuizAction =
     | SetAuthAction
     | UpdateQuestionAction
@@ -40,3 +45,7 @@ export const setAuth = (isAuth: boolean): SetAuthAction => ({
     type: SET_AUTH,
     payload: {isAuth}
 })
+
+export const resetState = (): SetResetAction => {
+    return { type: RESET_STATE };
+}
