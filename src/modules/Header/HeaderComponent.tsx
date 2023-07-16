@@ -13,10 +13,11 @@ import Timer from "features/timer/Timer";
 const {Header} = Layout
 
 interface HeaderProps {
-    isAuth: boolean
+    isAuth: boolean;
+    time: number;
 }
 
-const HeaderComponent = ({isAuth}: HeaderProps ) => {
+const HeaderComponent = ({isAuth, time}: HeaderProps ) => {
     const dispatch = useDispatch();
     const onLogout = (isAuth: boolean) => {
         dispatch(setAuth(isAuth))
@@ -68,7 +69,7 @@ const HeaderComponent = ({isAuth}: HeaderProps ) => {
 
     return (
         <Header className={classNames(cls.main)}>
-            {isAuth && <div className={classNames(cls.timer)}> <Timer maxTime={600} onTimeUp={onTimeUp}/></div>}
+            {isAuth && <div className={classNames(cls.timer)}> <Timer maxTime={time} onTimeUp={onTimeUp}/></div>}
             {isAuth ? <Button onClick={handeButtonLogout}>Выйти</Button> : <Button onClick={handeButtonLogin}>Войти</Button>}
             {!isAuth && <Button onClick={handleButtonReg}>Зарегистрироваться</Button>}
             <Modal  open={isModalOpen} onCancel={closeModal} footer={null}>

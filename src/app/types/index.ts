@@ -11,6 +11,7 @@ export interface QuizState {
     isFinished: boolean;
     questions: Question[];
     isAuth: boolean;
+    time: number;
 }
 
 export const UPDATE_QUESTION = 'UPDATE_QUESTION';

@@ -35,6 +35,7 @@ const initialState: QuizState = {
     score: 0,
     isFinished: false,
     isAuth: false,
+    time: 300,
     questions
 };
 
@@ -77,7 +78,10 @@ const quizReducer = (state = initialState, action: QuizAction): QuizState => {
                 isAuth: action.payload.isAuth
             };
         case RESET_STATE:
-            return initialState;
+            return {
+                ...initialState,
+                isAuth: true,
+            };
         default:
             return state;
     }
