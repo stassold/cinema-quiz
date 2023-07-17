@@ -11,8 +11,10 @@ interface LoginData {
     password: string;
 }
 
+const BASE_URL = 'http://localhost:3010';
+
 export function login(data: LoginData): Promise<LoginResponse> {
-    return axios.post<LoginResponse>('http://localhost:3010/login', data)
+    return axios.post<LoginResponse>(`${BASE_URL}/login`, data)
         .then((response: AxiosResponse<LoginResponse>) => response.data)
         .catch(error => {
             throw new Error(error.message);
@@ -20,7 +22,7 @@ export function login(data: LoginData): Promise<LoginResponse> {
 }
 
 export function signup(data: LoginData): Promise<LoginResponse> {
-    return axios.post<LoginResponse>('http://localhost:3010/signup', data)
+    return axios.post<LoginResponse>(`${BASE_URL}/signup`, data)
         .then((response: AxiosResponse<LoginResponse>) => response.data)
         .catch(error => {
             throw new Error(error.message);
@@ -28,7 +30,7 @@ export function signup(data: LoginData): Promise<LoginResponse> {
 }
 
 export function getUserData(userToken: string): Promise<LoginResponse> {
-    return axios.get('http://localhost:3010/user', {
+    return axios.get(`${BASE_URL}/user`, {
         headers: {
             'Authorization': `Bearer ${userToken}`
         }
