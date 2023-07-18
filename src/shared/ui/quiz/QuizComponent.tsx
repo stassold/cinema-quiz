@@ -6,6 +6,8 @@ import {useState} from "react";
 import ButtonNavigationComponent from "shared/ui/ButtonNavigation/ButtonNavigationComponent";
 import cls from './QuizComponent.module.scss'
 
+
+
 const QuizComponent = () => {
     const dispatch = useDispatch();
     const questions = useSelector((state: RootState) => state.quiz.questions);
