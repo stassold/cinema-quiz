@@ -11,7 +11,7 @@
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "predeploy": "npm run build:prod",
-    "deploy": "gh-pages -d build:prod",
+    "deploy": "gh-pages -d build",
     "test": "jest --transform=ts-jest"
   },
   "keywords": [],
