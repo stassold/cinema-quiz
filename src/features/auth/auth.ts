@@ -13,7 +13,7 @@ interface LoginData {
     password: string;
 }
 
-const BASE_URL = 'http://134.0.116.109:3010';
+const BASE_URL = 'http://95.163.229.183:3010';
 
 export function login(data: LoginData): Promise<LoginResponse> {
     return axios
