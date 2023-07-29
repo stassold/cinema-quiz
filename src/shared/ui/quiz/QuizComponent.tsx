@@ -15,7 +15,7 @@ const QuizComponent = () => {
     const score = useSelector((state: RootState) => state.quiz.score);
     const [currentPage, setCurrentPage] = useState(0);
 
-    const handleAnswerSelect = (answerIndex: number, questionIndex: number, userAnswer: number | null) => {
+     const handleAnswerSelect = (answerIndex: number, questionIndex: number, userAnswer: number | null) => {
         const question = questions[questionIndex];
         const isCorrect = question.correctAnswerIndex === answerIndex;
         dispatch(updateQuestion(questionIndex, isCorrect, userAnswer));
@@ -35,26 +35,32 @@ const QuizComponent = () => {
 
     return (
         <div className={cls.main}>
-            {questions.slice(currentPage * 5, currentPage * 5 + 5).map((question, index) => (
-                <QuestionComponent
-                    questionIndex={currentPage * 5 + index}
-                    correctUserResponse={question.correctUserResponse}
-                    key={currentPage * 5 + index}
-                    text={question.text}
-                    answers={question.answers}
-                    onAnswerSelect={handleAnswerSelect}
-                    userAnswer={question.userAnswer}
-                    isFinished={isFinished}
-                />
-            ))}
+            {questions
+                .slice(currentPage * 5, currentPage * 5 + 5)
+                .map((question, index) => {
+                    const questionIndex = currentPage * 5 + index;
+                    return (
+                        <QuestionComponent
+                            questionIndex={questionIndex}
+                            correctUserResponse={question.correctUserResponse}
+                            key={questionIndex}
+                            text={question.text}
+                            answers={question.answers}
+                            onAnswerSelect={handleAnswerSelect}
+                            userAnswer={question.userAnswer}
+                            isFinished={isFinished}
+                        />
+                    );
+                })}
             <div>
-                <ButtonNavigationComponent handlePreviousPage={handlePreviousPage}
-                                           handleNextPage={handleNextPage}
-                                           handleQuizSubmit={handleQuizSubmit}
-                                           currentPage={currentPage}
-                                           countQuestions={questions.length}
-                                           isFinished={isFinished}
-                                           score={score}
+                <ButtonNavigationComponent
+                    handlePreviousPage={handlePreviousPage}
+                    handleNextPage={handleNextPage}
+                    handleQuizSubmit={handleQuizSubmit}
+                    currentPage={currentPage}
+                    countQuestions={questions.length}
+                    isFinished={isFinished}
+                    score={score}
                 />
             </div>
         </div>

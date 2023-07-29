@@ -13,7 +13,7 @@ export interface FormData {
 }
 
 function AuthForm(props: FormProps) {
-    const nameSubmit = props.nameSubmit
+    const {nameSubmit, onSubmit} = props
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -25,7 +25,7 @@ function AuthForm(props: FormProps) {
         };
         setEmail('');
         setPassword('');
-        props.onSubmit(formData);
+        onSubmit(formData);
     };
 
     return (
